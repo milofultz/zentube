@@ -1,0 +1,347 @@
+/* Adapted heavily */
+
+/*
+* Skeleton V2.0.4
+* Copyright 2014, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 12/29/2014
+*/
+
+/* Grid
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.column,
+.columns {
+  width: 100%;
+  float: left;
+  box-sizing: border-box;
+}
+
+@media (max-width: 999px) {
+  .container {
+    width: 80%;
+  }
+  .column,
+  .columns {
+    margin-left: 4%;
+    clear: both;
+  }
+  .column:first-child,
+  .columns:first-child {
+    margin-left: 0;
+  }
+
+  .one.column,
+  .one.columns,
+  .two.columns,
+  .three.columns,
+  .four.columns,
+  .five.columns,
+  .six.columns,
+  .seven.columns,
+  .nine.columns,
+  .ten.columns,
+  .eleven.columns,
+  .twelve.columns {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+@media (min-width: 1000px) {
+  .container {
+    width: 80%;
+  }
+  .column,
+  .columns {
+    margin-left: 4%;
+  }
+  .column:first-child,
+  .columns:first-child {
+    margin-left: 0;
+  }
+
+  .one.column,
+  .one.columns {
+    width: 4.66666666667%;
+  }
+  .two.columns {
+    width: 13.3333333333%;
+  }
+  .three.columns {
+    width: 22%;
+  }
+  .four.columns {
+    width: 30.6666666667%;
+  }
+  .five.columns {
+    width: 39.3333333333%;
+  }
+  .six.columns {
+    width: 48%;
+  }
+  .seven.columns {
+    width: 56.6666666667%;
+  }
+  .eight.columns {
+    width: 65.3333333333%;
+  }
+  .nine.columns {
+    width: 74%;
+  }
+  .ten.columns {
+    width: 82.6666666667%;
+  }
+  .eleven.columns {
+    width: 91.3333333333%;
+  }
+  .twelve.columns {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* Base Styles
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* NOTE
+html is set to 62.5% so that all the REM measurements throughout Skeleton
+are based on 10px sizing. So basically 1.5rem = 15px :) */
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: 'Raleway', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif;
+  color: #222;
+}
+
+/* Buttons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+button,
+input[type='submit'],
+input[type='button'] {
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: #555;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.button:hover,
+button:hover,
+input[type='submit']:hover,
+input[type='button']:hover,
+.button:focus,
+button:focus,
+input[type='submit']:focus,
+input[type='button']:focus {
+  color: #333;
+  border-color: #888;
+  outline: 0;
+}
+
+/* Forms
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type='text'],
+textarea {
+  height: 38px;
+  padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+  background-color: #fff;
+  border: 1px solid #d1d1d1;
+  border-radius: 4px;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+textarea {
+  min-height: 65px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+input[type='text']:focus,
+textarea:focus {
+  border: 1px solid #33c3f0;
+  outline: 0;
+}
+
+/* Spacing
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+button {
+  margin-bottom: 1rem;
+}
+input,
+textarea {
+  margin-bottom: 1.5rem;
+}
+
+/* Misc
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+hr {
+  margin-top: 3rem;
+  margin-bottom: 3.5rem;
+  border-width: 0;
+  border-top: 1px solid #e1e1e1;
+}
+
+/*  */
+/* My CSS */
+/*  */
+
+body {
+  background-color: black;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #999;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #222;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.line {
+  color: gray;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+#legend-s,
+#legend-time,
+#legend-o {
+  color: gray;
+  transition: ease-in-out, color 0.35s ease-in-out;
+}
+
+#legend-s:hover,
+#legend-time:hover,
+#legend-o:hover {
+  color: white;
+}
+
+.top-matter {
+  margin: 1.5em 0 1.5em 0;
+}
+
+.video-player {
+  padding-bottom: 56.25%;
+  height: 0;
+  position: relative;
+  padding-top: 30px;
+  padding-right: 50px;
+  overflow: hidden;
+  box-shadow: 0em 0em 5em 15px #1d1d1d;
+}
+.video-player iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+hr {
+  border-width: 0.5px;
+  width: 30%;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  display: none;
+}
+
+.notes {
+  margin-bottom: 5%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+input {
+  color: black;
+  border: 1px solid #333;
+  font: 16px;
+}
+
+textarea {
+  box-sizing: content-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 75vh;
+  width: 100%;
+  border: 1px solid #333;
+  background: none;
+  color: white;
+  font: 16px monospace;
+  resize: none;
+  transition: ease-in-out, border 0.35s ease-in-out;
+}
+
+textarea:focus {
+  border: 1px solid #555;
+  outline: 0;
+}
+
+#side {
+  display: block;
+}
+
+#bottom {
+  display: none;
+}
+
+@media only screen and (max-width: 999px) {
+  #side {
+    display: none;
+  }
+
+  #bottom {
+    display: block;
+  }
+
+  textarea {
+    height: 12em;
+  }
+
+  hr {
+    display: block;
+  }
+}

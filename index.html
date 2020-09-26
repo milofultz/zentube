@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZenTube</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row top-matter"></div>
+      <div class="row">
+        <div class="eight columns video-wrapper">
+          <div class="div video-player">
+            <div id="video-player"></div>
+          </div>
+        </div>
+        <div class="four columns notes" id="side">
+          <textarea name="editor" id="editor-side"></textarea>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="twelve columns notes" id="bottom">
+          <textarea name="editor" id="editor-bottom"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = 'https://www.youtube.com/iframe_api';
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // This function creates an <iframe> (and YouTube player)
+      // after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('video-player', {
+          height: '720',
+          width: '1080',
+          videoId: location.hash.slice(1)
+            ? location.hash.slice(1)
+            : 'tI_b9dfJq7A',
+          events: {},
+        });
+      }
+    </script>
+    <script src="app.js"></script>
+  </body>
+</html>
