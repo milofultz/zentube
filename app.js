@@ -1,7 +1,6 @@
 // localstorage controller
 const StorageCtrl = (function () {
   return {
-    // save textarea to localStorage
     setLS: function (id, value) {
       localStorage.setItem(id, value);
     },
@@ -14,14 +13,13 @@ const StorageCtrl = (function () {
 // ui controller
 const UICtrl = (function () {
   const UISelectors = {
-    editorSide: '#editor-side',
-    editorBottom: '#editor-bottom',
-    video: '.video-player',
     topMatter: '.top-matter',
-    videoUrl: '#video-url',
-    videoStream: 'video',
     legend: '.legend',
     filename: '#filename',
+    videoUrl: '#video-url',
+    video: '.video-player',
+    editorSide: '#editor-side',
+    editorBottom: '#editor-bottom',
   };
 
   return {
@@ -50,7 +48,6 @@ const UICtrl = (function () {
       input.setAttribute('type', 'text');
       input.setAttribute('id', 'video-url');
       input.setAttribute('placeholder', 'Youtube URL');
-      input.style.marginRight = '1em';
 
       const button = document.createElement('button');
       button.setAttribute('id', 'video-url-submit');
@@ -94,7 +91,6 @@ const UICtrl = (function () {
     },
   };
 })();
-// dynamically size the textarea based on window height?
 
 // app
 const App = (function (StorageCtrl, UICtrl) {
@@ -104,20 +100,16 @@ const App = (function (StorageCtrl, UICtrl) {
     : 'tI_b9dfJq7A';
 
   const loadEventListeners = function () {
-    // on keyup, parse the input
     document.addEventListener('keyup', parseInput);
-    // on load, load localStorage for unique video id
     document.addEventListener('DOMContentLoaded', loadNotes);
-    // on new video submission, go to url with new video after # mark
-    const topMatter = document.querySelector(UISelectors.topMatter);
-    topMatter.addEventListener('click', clickTopMatter);
+    document
+      .querySelector(UISelectors.topMatter)
+      .addEventListener('click', clickTopMatter);
   };
 
   const parseInput = function (e) {
-    // ctrl s export
     if (e.ctrlKey === true && e.code === 'KeyS') {
       UICtrl.saveFileState();
-      // ctrl o new video
     } else if (e.ctrlKey === true && e.code === 'KeyO') {
       UICtrl.videoInputState();
     } else if (e.ctrlKey === true && e.code === 'KeyD') {
@@ -166,8 +158,7 @@ const App = (function (StorageCtrl, UICtrl) {
   };
 
   const exportFile = () => {
-    // taken almost exactly from Josh Avanier's "Down"
-    // https://down.avanier.now.sh/#030303-e4e4e4
+    // taken almost exactly from Josh Avanier's "Down" https://down.avanier.now.sh/#030303-e4e4e4
     const filename = document.querySelector(UISelectors.filename).value;
     if (filename !== null || filename !== '') {
       const text = UICtrl.getBottomText().replace(/\n/g, '\r\n');
