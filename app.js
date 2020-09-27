@@ -183,7 +183,7 @@ const App = (function (StorageCtrl, UICtrl) {
     if (videoId === null || videoId === '') {
       UICtrl.legendState();
     }
-    const href = `${window.location.origin}${window.location.pathname}#${videoId}`;
+    const href = `#${videoId}`;
     window.location.href = href;
     window.location.reload();
 
