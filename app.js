@@ -110,13 +110,16 @@ const App = (function (StorageCtrl, UICtrl) {
   const parseInput = function (e) {
     if (e.ctrlKey === true && e.code === 'KeyS') {
       UICtrl.saveFileState();
+      e.preventDefault();
     } else if (e.ctrlKey === true && e.code === 'KeyO') {
       UICtrl.videoInputState();
+      e.preventDefault();
     } else if (e.ctrlKey === true && e.code === 'KeyD') {
       const time = getCurrentTime();
       UICtrl.addCurrentTime(time);
       saveNotes();
       loadNotes();
+      e.preventDefault();
     } else {
       // save to ls and refresh both text boxes
       saveNotes(e.srcElement.id);
