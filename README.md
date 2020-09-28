@@ -17,3 +17,4 @@ Borrowed/stole heavily from [Skeleton CSS](http://getskeleton.com/) and Josh Alv
 - ~~add current timestamps to text box~~
 - Make text area dynamically fit size of window when under 1000px in width
 - Balance video vertically in the window when over 1000px in width
+  - The problem is that on a big screen, the video can get really small. On _my_ screen, 1000px is a good breakpoint, but not on a big desktop or a smaller screen. Maybe a better solution is to add a way to switch from horizontal to vertical layout? Move all CSS rules to JS attributes.
