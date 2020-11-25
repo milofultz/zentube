@@ -9,4 +9,3 @@
 - Switch between video and notes with a keystroke. Move focus between video/notes
 - Move active version to Github Pages
 - Move the text box to the end when adding a timestamp
-- Why when not at the very end of the textarea does CTRL-D delete a letter and THEN add the timestamp to the end?

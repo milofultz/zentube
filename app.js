@@ -33,11 +33,10 @@ const UICtrl = (function () {
       (document.querySelector(UISelectors.editorSide).value = text),
     // textarea helpers
     addCurrentTime: (time) => {
-      const text = `${time} `;
       const editorBottom = document.querySelector(UISelectors.editorBottom);
       const editorSide = document.querySelector(UISelectors.editorSide);
-      editorBottom.value = `${editorBottom.value}${text}`;
-      editorSide.value = `${editorSide.value}${text}`;
+      editorBottom.value = editorBottom.value + time;
+      editorSide.value = editorSide.value + time;
     },
     // top matter states
     videoInputState: () => {
@@ -82,7 +81,7 @@ const UICtrl = (function () {
     legendState: () => {
       const html = `
         <em class="legend"><span class="line" id="legend-s">ctrl + s: save</span>&nbsp;&nbsp;&nbsp;
-          <span class="line" id="legend-time">ctrl + d: add timestamp</span>&nbsp;&nbsp;&nbsp;
+          <span class="line" id="legend-time">ctrl + e: add timestamp</span>&nbsp;&nbsp;&nbsp;
           <span class="line" id="legend-o">ctrl + o: open youtube video</span>
         </em>
       `;
@@ -113,7 +112,7 @@ const App = (function (StorageCtrl, UICtrl) {
     } else if (e.ctrlKey === true && e.code === 'KeyO') {
       UICtrl.videoInputState();
       e.preventDefault();
-    } else if (e.ctrlKey === true && e.code === 'KeyD') {
+    } else if (e.ctrlKey === true && e.code === 'KeyE') {
       const time = getCurrentTime();
       UICtrl.addCurrentTime(time);
       saveNotes();
@@ -175,7 +174,6 @@ const App = (function (StorageCtrl, UICtrl) {
     }
 
     UICtrl.legendState();
-    e.preventDefault();
   };
 
   const submitVideo = (e) => {
@@ -192,7 +190,7 @@ const App = (function (StorageCtrl, UICtrl) {
     e.preventDefault();
   };
 
-  getCurrentTime = () => {
+  const getCurrentTime = () => {
     const currentTime = player.getCurrentTime();
     const hours = Math.floor(currentTime / 3600);
     const minutes = Math.floor(currentTime / 60).toLocaleString('en-US', {
