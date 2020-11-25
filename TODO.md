@@ -8,4 +8,3 @@
   - Clear all videos/notes button
 - Switch between video and notes with a keystroke. Move focus between video/notes
 - Move active version to Github Pages
-- Move the text box to the end when adding a timestamp

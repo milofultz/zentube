@@ -38,6 +38,12 @@ const UICtrl = (function () {
       editorBottom.value = editorBottom.value + time;
       editorSide.value = editorSide.value + time;
     },
+    scrollToBottomOfTextarea: () => {
+      const editorBottom = document.querySelector(UISelectors.editorBottom);
+      const editorSide = document.querySelector(UISelectors.editorSide);
+      editorBottom.scrollTop = 99999;
+      editorSide.scrollTop = 99999;
+    },
     // top matter states
     videoInputState: () => {
       const form = document.createElement('form');
@@ -136,9 +142,10 @@ const App = (function (StorageCtrl, UICtrl) {
     }
   };
 
-  const addTimestamp = (e) => {
+  const addTimestamp = () => {
     const time = getCurrentTime();
     UICtrl.addCurrentTimeToNotes(time);
+    UICtrl.scrollToBottomOfTextarea();
     saveNotes();
     loadNotes();
   };
