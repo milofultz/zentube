@@ -32,7 +32,7 @@ const UICtrl = (function () {
     setSideText: (text) =>
       (document.querySelector(UISelectors.editorSide).value = text),
     // textarea helpers
-    addCurrentTime: (time) => {
+    addCurrentTimeToNotes: (time) => {
       const editorBottom = document.querySelector(UISelectors.editorBottom);
       const editorSide = document.querySelector(UISelectors.editorSide);
       editorBottom.value = editorBottom.value + time;
@@ -113,10 +113,7 @@ const App = (function (StorageCtrl, UICtrl) {
       UICtrl.videoInputState();
       e.preventDefault();
     } else if (e.ctrlKey === true && e.code === 'KeyE') {
-      const time = getCurrentTime();
-      UICtrl.addCurrentTime(time);
-      saveNotes();
-      loadNotes();
+      addTimestamp();
       e.preventDefault();
     } else {
       // save to ls and refresh both text boxes
@@ -131,15 +128,19 @@ const App = (function (StorageCtrl, UICtrl) {
     } else if (e.target.id === 'legend-s') {
       UICtrl.saveFileState();
     } else if (e.target.id === 'legend-time') {
-      const time = getCurrentTime();
-      UICtrl.addCurrentTime(time);
-      saveNotes();
-      loadNotes();
+      addTimestamp();
     } else if (e.target.id === 'video-url-submit') {
       submitVideo(e);
     } else if (e.target.id === 'filename-submit') {
       exportFile(e);
     }
+  };
+
+  const addTimestamp = (e) => {
+    const time = getCurrentTime();
+    UICtrl.addCurrentTimeToNotes(time);
+    saveNotes();
+    loadNotes();
   };
 
   const saveNotes = (source) => {
