@@ -33,8 +33,7 @@ const UICtrl = (function () {
       (document.querySelector(UISelectors.editorSide).value = text),
     // textarea helpers
     addCurrentTime: (time) => {
-      const text =
-        UICtrl.getBottomText().trim() !== '' ? `\n${time} ` : `${time} `;
+      const text = `${time} `;
       const editorBottom = document.querySelector(UISelectors.editorBottom);
       const editorSide = document.querySelector(UISelectors.editorSide);
       editorBottom.value = `${editorBottom.value}${text}`;
