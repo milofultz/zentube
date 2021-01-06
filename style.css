@@ -1,16 +1,7 @@
-/* Adapted heavily */
-
-/*
-* Skeleton V2.0.4
-* Copyright 2014, Dave Gamache
-* www.getskeleton.com
-* Free to use under the MIT license.
-* http://www.opensource.org/licenses/mit-license.php
-* 12/29/2014
-*/
+/* Adapted heavily from Skeleton CSS */
 
 /* Grid
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
+-------------------------------------------------- */
 .container {
   position: relative;
   width: 100%;
@@ -109,24 +100,14 @@
 }
 
 /* Base Styles
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-/* NOTE
-html is set to 62.5% so that all the REM measurements throughout Skeleton
-are based on 10px sizing. So basically 1.5rem = 15px :) */
-html {
-  font-size: 62.5%;
-}
+-------------------------------------------------- */
 body {
-  font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
-  font-weight: 400;
-  font-family: 'Raleway', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial,
-    sans-serif;
+  font-family: 'Nunito', sans-serif;
   color: #222;
+  background-color: black;
 }
 
-/* Buttons
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
 button,
 input[type='submit'],
 input[type='button'] {
@@ -148,26 +129,11 @@ input[type='button'] {
   cursor: pointer;
   box-sizing: border-box;
 }
-.button:hover,
-button:hover,
-input[type='submit']:hover,
-input[type='button']:hover,
-.button:focus,
-button:focus,
-input[type='submit']:focus,
-input[type='button']:focus {
-  color: #333;
-  border-color: #888;
-  outline: 0;
-}
 
-/* Forms
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
 input[type='text'],
 textarea {
   height: 38px;
   padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
-  background-color: #fff;
   border: 1px solid #d1d1d1;
   border-radius: 4px;
   margin-right: 1em;
@@ -181,41 +147,26 @@ textarea {
   padding-bottom: 6px;
 }
 
-input[type='text']:focus,
-textarea:focus {
+.button:hover,
+button:hover,
+input[type='submit']:hover,
+input[type='button']:hover,
+.button:focus,
+button:focus,
+input[type='submit']:focus,
+input[type='button']:focus {
+  color: #333;
+  border-color: #888;
+  outline: 0;
+}
+
+input[type='text']:focus {
   border: 1px solid #33c3f0;
   outline: 0;
 }
 
-/* Spacing
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-button {
-  margin-bottom: 1rem;
-}
-input,
-textarea {
-  margin-bottom: 1.5rem;
-}
-
-/* Misc
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-hr {
-  margin-top: 3rem;
-  margin-bottom: 3.5rem;
-  border-width: 0;
-  border-top: 1px solid #e1e1e1;
-}
-
-/*  */
-/* My CSS */
-/*  */
-
-body {
-  background-color: black;
-}
-
-/* Scrollbar 
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* Scrollbar
+-------------------------------------------------- */
 ::-webkit-scrollbar {
   width: 12px;
 }
@@ -233,43 +184,52 @@ body {
 }
 
 /* Top-Matter
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-.top-matter {
-  margin: 1.5em 0 1.5em 0;
+-------------------------------------------------- */
+.name {
+	font-size: 2.5em;
+	letter-spacing: 10px;
+  color: #aaa;
+  text-shadow: 0;
+  transition: all 1s ease-in-out;
+  margin-top: 0.5em;
 }
 
-/* Controlled line breaks  */
+.name:hover {
+  letter-spacing: 14px;
+  color: #eee;
+  text-shadow: 0 3px 5px #999;
+  transform: translateY(-3px);
+}
+
+.top-matter {
+  margin: 0.75em 0 2em 0;
+}
+
+.top-matter-input {
+  color: black;
+  border: 1px solid #333;
+  font-size: 12px;
+}
+
 .line {
   color: gray;
   display: inline-block;
   white-space: nowrap;
+  margin: auto 0.3em;
+  transition: color 0.5s ease-in-out;
 }
 
-/* Legend State CSS */
-#legend-s,
-#legend-time,
-#legend-o {
-  color: gray;
-  transition: ease-in-out, color 0.35s ease-in-out;
-}
-
-#legend-s:hover,
-#legend-time:hover,
-#legend-o:hover {
+.line:hover {
   color: white;
 }
 
 /* Video and Text Editor
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-/* Center content within rows */
+-------------------------------------------------- */
 .row {
   display: flex;
   justify-content: center;
 }
 
-/* Responsive Video Player */
 .video-player {
   padding-bottom: 56.25%;
   height: 0;
@@ -277,8 +237,9 @@ body {
   padding-top: 30px;
   padding-right: 50px;
   overflow: hidden;
-  box-shadow: 0em 0em 5em 15px #1d1d1d;
+  box-shadow: 0 0 5em 15px #1d1d1d;
 }
+
 .video-player iframe {
   position: absolute;
   left: 0;
@@ -294,48 +255,7 @@ body {
   position: relative;
 }
 
-/* Pseudo-Responsive Column Shifting */
-#side {
-  display: block;
-}
-
-#bottom {
-  display: none;
-}
-
-@media only screen and (max-width: 999px) {
-  #side {
-    display: none;
-  }
-
-  #bottom {
-    display: block;
-  }
-
-  textarea {
-    height: 12em;
-  }
-
-  hr {
-    display: block;
-  }
-}
-
-hr {
-  border-width: 0.5px;
-  width: 30%;
-  margin-top: 2em;
-  margin-bottom: 2em;
-  display: none;
-}
-
-input {
-  color: black;
-  border: 1px solid #333;
-  font: 16px;
-}
-
-textarea {
+.editor {
   box-sizing: content-box;
   position: absolute;
   left: 0;
@@ -344,13 +264,35 @@ textarea {
   width: 100%;
   border: 1px solid #333;
   background: none;
-  color: white;
+  color: #ccc;
   font: 16px monospace;
   resize: none;
   transition: ease-in-out, border 0.35s ease-in-out;
 }
 
-textarea:focus {
+.editor:focus {
   border: 1px solid #555;
   outline: 0;
+}
+
+.side-editor-container {
+  display: block;
+}
+
+.bottom-editor-container {
+  display: none;
+}
+
+@media only screen and (max-width: 999px) {
+  .side-editor-container {
+    display: none;
+  }
+
+  .bottom-editor-container {
+    display: block;
+  }
+
+  .editor {
+    height: 12em;
+  }
 }

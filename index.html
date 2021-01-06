@@ -1,55 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZenTube</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="data:," />
-  </head>
-  <body>
-    <div class="container">
-      <div class="row top-matter"></div>
-      <div class="row">
-        <div class="eight columns video-wrapper">
-          <div class="div video-player">
-            <div id="video-player"></div>
-          </div>
-        </div>
-        <div class="four columns notes" id="side">
-          <textarea name="editor" id="editor-side"></textarea>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZenTube</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:," />
+</head>
+
+<body>
+  <div class="container">
+    <div id="name" class="row name">ZENTUBE</div>
+    <div id="top-matter" class="row top-matter"></div>
+    <div class="row">
+      <div class="eight columns video-wrapper">
+        <div id="video-player-container" class="div video-player">
+          <div id="video-player"></div>
         </div>
       </div>
-      <hr />
-      <div class="row">
-        <div class="twelve columns notes" id="bottom">
-          <textarea name="editor" id="editor-bottom"></textarea>
-        </div>
+      <div id="side" class="four columns notes side-editor-container">
+        <textarea name="editor" id="editor-side" class="editor"></textarea>
       </div>
     </div>
+    <div class="row">
+      <div id="bottom" class="twelve columns notes bottom-editor-container">
+        <textarea name="editor" id="editor-bottom" class="editor"></textarea>
+      </div>
+    </div>
+  </div>
 
-    <script>
-      // This code loads the IFrame Player API code asynchronously.
-      var tag = document.createElement('script');
+  <script>
+    // This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
 
-      tag.src = 'https://www.youtube.com/iframe_api';
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-      // This function creates an <iframe> (and YouTube player)
-      // after the API code downloads.
-      var player;
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player('video-player', {
-          height: '720',
-          width: '1080',
-          videoId: location.hash.slice(1)
-            ? location.hash.slice(1)
-            : 'tI_b9dfJq7A',
-          events: {},
-        });
-      }
-    </script>
-    <script src="app.js"></script>
-  </body>
+    // This function creates an <iframe> (and YouTube player) after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('video-player', {
+        height: '720',
+        width: '1080',
+        videoId: location.hash.slice(1)
+          ? location.hash.slice(1)
+          : 'tI_b9dfJq7A',
+        events: {},
+      });
+    }
+  </script>
+  <script src="app.js"></script>
+</body>
+
 </html>

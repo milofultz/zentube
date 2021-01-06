@@ -13,17 +13,15 @@ const StorageCtrl = (function () {
 // ui controller
 const UICtrl = (function () {
   const UISelectors = {
-    topMatter: '.top-matter',
-    legend: '.legend',
+    topMatter: '#top-matter',
+    legend: '#legend',
     filename: '#filename',
     videoUrl: '#video-url',
-    video: '.video-player',
     editorSide: '#editor-side',
     editorBottom: '#editor-bottom',
   };
 
   return {
-    // getters and setters
     getUISelectors: () => UISelectors,
     getBottomText: () => document.querySelector(UISelectors.editorBottom).value,
     getSideText: () => document.querySelector(UISelectors.editorSide).value,
@@ -31,7 +29,6 @@ const UICtrl = (function () {
       (document.querySelector(UISelectors.editorBottom).value = text),
     setSideText: (text) =>
       (document.querySelector(UISelectors.editorSide).value = text),
-    // textarea helpers
     addCurrentTimeToNotes: (time) => {
       const editorBottom = document.querySelector(UISelectors.editorBottom);
       const editorSide = document.querySelector(UISelectors.editorSide);
@@ -51,6 +48,7 @@ const UICtrl = (function () {
       const input = document.createElement('input');
       input.setAttribute('type', 'text');
       input.setAttribute('id', 'video-url');
+      input.setAttribute('class', 'top-matter-input');
       input.setAttribute('placeholder', 'Youtube URL');
 
       const button = document.createElement('button');
@@ -70,6 +68,7 @@ const UICtrl = (function () {
       const input = document.createElement('input');
       input.setAttribute('type', 'text');
       input.setAttribute('id', 'filename');
+      input.setAttribute('class', 'top-matter-input');
       input.setAttribute('placeholder', 'Filename.txt');
       input.style.marginRight = '1em';
 
@@ -85,13 +84,12 @@ const UICtrl = (function () {
       topMatter.appendChild(form);
     },
     legendState: () => {
-      const html = `
-        <em class="legend"><span class="line" id="legend-s">ctrl + s: save</span>&nbsp;&nbsp;&nbsp;
-          <span class="line" id="legend-time">ctrl + e: add timestamp</span>&nbsp;&nbsp;&nbsp;
-          <span class="line" id="legend-o">ctrl + o: open youtube video</span>
+      document.querySelector(UISelectors.topMatter).innerHTML = `
+        <em id="legend" class="legend"><span id="legend-s" class="line">ctrl + s: save</span>
+          <span id="legend-time" class="line">ctrl + e: add timestamp</span>
+          <span id="legend-o" class="line">ctrl + o: open youtube video</span>
         </em>
       `;
-      document.querySelector(UISelectors.topMatter).innerHTML = html;
     },
   };
 })();
@@ -99,47 +97,20 @@ const UICtrl = (function () {
 // app
 const App = (function (StorageCtrl, UICtrl) {
   const UISelectors = UICtrl.getUISelectors();
-  const videoId = location.hash.slice(1)
-    ? location.hash.slice(1)
-    : 'tI_b9dfJq7A';
+  const videoId = location.hash.slice(1) ? location.hash.slice(1) : 'tI_b9dfJq7A';
 
-  const loadEventListeners = function () {
-    document.addEventListener('keyup', parseInput);
-    document.addEventListener('DOMContentLoaded', loadNotes);
-    document
-      .querySelector(UISelectors.topMatter)
-      .addEventListener('click', clickTopMatter);
-  };
-
-  const parseInput = function (e) {
-    if (e.ctrlKey === true && e.code === 'KeyS') {
-      UICtrl.saveFileState();
-      e.preventDefault();
-    } else if (e.ctrlKey === true && e.code === 'KeyO') {
-      UICtrl.videoInputState();
-      e.preventDefault();
-    } else if (e.ctrlKey === true && e.code === 'KeyE') {
-      addTimestamp();
-      e.preventDefault();
-    } else {
-      // save to ls and refresh both text boxes
-      saveNotes(e.srcElement.id);
-      loadNotes();
-    }
-  };
-
-  const clickTopMatter = (e) => {
-    if (e.target.id === 'legend-o') {
-      UICtrl.videoInputState();
-    } else if (e.target.id === 'legend-s') {
-      UICtrl.saveFileState();
-    } else if (e.target.id === 'legend-time') {
-      addTimestamp();
-    } else if (e.target.id === 'video-url-submit') {
-      submitVideo(e);
-    } else if (e.target.id === 'filename-submit') {
-      exportFile(e);
-    }
+  const getCurrentTime = () => {
+    const currentTime = player.getCurrentTime();
+    const hours = Math.floor(currentTime / 3600);
+    const minutes = Math.floor(currentTime / 60).toLocaleString('en-US', {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const seconds = Math.floor(currentTime % 60).toLocaleString('en-US', {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    return `[${hours}:${minutes}:${seconds}]`;
   };
 
   const addTimestamp = () => {
@@ -150,20 +121,18 @@ const App = (function (StorageCtrl, UICtrl) {
     loadNotes();
   };
 
-  const saveNotes = (source) => {
-    let text;
-    if (source === UISelectors.editorBottom.slice(1)) {
-      text = UICtrl.getBottomText();
-    } else {
-      text = UICtrl.getSideText();
+  const submitVideo = (e) => {
+    const link = document.querySelector(UISelectors.videoUrl).value;
+    const re = /(?<=\?v=)\w{8,}/;
+    const videoId = re.exec(link)[0];
+    if (videoId === null || videoId === '') {
+      UICtrl.legendState();
     }
-    StorageCtrl.setLS(videoId, text);
-  };
+    const href = `#${videoId}`;
+    window.location.href = href;
+    window.location.reload();
 
-  const loadNotes = () => {
-    const text = StorageCtrl.getLS(videoId);
-    UICtrl.setSideText(text);
-    UICtrl.setBottomText(text);
+    e.preventDefault();
   };
 
   const exportFile = () => {
@@ -184,33 +153,57 @@ const App = (function (StorageCtrl, UICtrl) {
     UICtrl.legendState();
   };
 
-  const submitVideo = (e) => {
-    const link = document.querySelector(UISelectors.videoUrl).value;
-    const re = /(?<=\?v=)\w{8,}/;
-    const videoId = re.exec(link)[0];
-    if (videoId === null || videoId === '') {
-      UICtrl.legendState();
+  const parseInput = function (e) {
+    if (e.ctrlKey === true && e.code === 'KeyS') {
+      UICtrl.saveFileState();
+      e.preventDefault();
+    } else if (e.ctrlKey === true && e.code === 'KeyO') {
+      UICtrl.videoInputState();
+      e.preventDefault();
+    } else if (e.ctrlKey === true && e.code === 'KeyE') {
+      addTimestamp();
+      e.preventDefault();
+    } else {
+      // save to ls and refresh both text boxes
+      saveNotes(e.srcElement.id);
+      loadNotes();
     }
-    const href = `#${videoId}`;
-    window.location.href = href;
-    window.location.reload();
-
-    e.preventDefault();
   };
 
-  const getCurrentTime = () => {
-    const currentTime = player.getCurrentTime();
-    const hours = Math.floor(currentTime / 3600);
-    const minutes = Math.floor(currentTime / 60).toLocaleString('en-US', {
-      minimumIntegerDigits: 2,
-      useGrouping: false,
-    });
-    const seconds = Math.floor(currentTime % 60).toLocaleString('en-US', {
-      minimumIntegerDigits: 2,
-      useGrouping: false,
-    });
+  const loadNotes = () => {
+    const text = StorageCtrl.getLS(videoId);
+    UICtrl.setSideText(text);
+    UICtrl.setBottomText(text);
+  };
 
-    return `[${hours}:${minutes}:${seconds}]`;
+  const saveNotes = (source) => {
+    let text;
+    if (source === UISelectors.editorBottom.slice(1)) {
+      text = UICtrl.getBottomText();
+    } else {
+      text = UICtrl.getSideText();
+    }
+    StorageCtrl.setLS(videoId, text);
+  };
+
+  const clickTopMatter = (e) => {
+    if (e.target.id === 'legend-o') {
+      UICtrl.videoInputState();
+    } else if (e.target.id === 'legend-s') {
+      UICtrl.saveFileState();
+    } else if (e.target.id === 'legend-time') {
+      addTimestamp();
+    } else if (e.target.id === 'video-url-submit') {
+      submitVideo(e);
+    } else if (e.target.id === 'filename-submit') {
+      exportFile(e);
+    }
+  };
+
+  const loadEventListeners = function () {
+    document.addEventListener('keyup', parseInput);
+    document.addEventListener('DOMContentLoaded', loadNotes);
+    document.querySelector(UISelectors.topMatter).addEventListener('click', clickTopMatter);
   };
 
   return {
