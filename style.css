@@ -277,6 +277,7 @@ input[type='text']:focus {
 
 .side-editor-container {
   display: block;
+  position: relative;
 }
 
 .bottom-editor-container {
@@ -290,9 +291,14 @@ input[type='text']:focus {
 
   .bottom-editor-container {
     display: block;
+    position: relative;
   }
 
   .editor {
-    height: 12em;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 10em;
+    margin-top: 30px;
   }
 }
