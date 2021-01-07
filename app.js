@@ -97,7 +97,7 @@ const UICtrl = (function () {
 // app
 const App = (function (StorageCtrl, UICtrl) {
   const UISelectors = UICtrl.getUISelectors();
-  const videoId = location.hash.slice(1) ? location.hash.slice(1) : 'tI_b9dfJq7A';
+  const videoId = location.hash.slice(1) ? location.hash.slice(1) : 'wBU9N35ZHIw';
 
   const getCurrentTime = () => {
     const currentTime = player.getCurrentTime();
