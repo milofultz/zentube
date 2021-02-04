@@ -192,13 +192,14 @@ input[type='text']:focus {
   text-shadow: 0;
   transition: all 1s ease-in-out;
   margin-top: 0.5em;
+  transform: translate(0 0);
 }
 
 .name:hover {
   letter-spacing: 14px;
   color: #eee;
   text-shadow: 0 3px 5px #999;
-  transform: translateY(-3px);
+  transform: translate(0, -3px);
 }
 
 .top-matter {
