@@ -1,3 +1,5 @@
+# migrated to codeberg: https://codeberg.org/milofultz/zentube
+
 # ZenTube
 
 I wanted to be able to take notes on a Youtube video without having to tab out of the window to a text editor all of the time. After seeing Josh Avanier's [Down](https://down.avanier.now.sh) and Hundred Rabbit's [Left](https://github.com/hundredrabbits/left), I realized I didn't need to do anything fancy, and in fact I preferred the minimalist layout that vanilla JS can provide.
